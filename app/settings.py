@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'authentication',
     'compressor',
+    'posts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -113,6 +114,32 @@ COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+    'C:/Users/adam/workspace/app/app/templates/',
+)
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
 )
 """
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -152,8 +179,15 @@ TEMPLATE_DIRS = (
 
 
 REST_FRAMEWORK = {
+    #'FORM_METHOD_OVERRIDE': None,
+    #'FORM_CONTENT_OVERRIDE': None,
+    #'FORM_CONTENTTYPE_OVERRIDE': None,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     )
 }
 
